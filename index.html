@@ -821,6 +821,26 @@ function markAllVisible(state){
   getVisible().forEach(function(c){state?cs.add(c.id):cs.delete(c.id);});
   save();updateStats();renderList();
 }
+
+function delCurrentSet(){
+  var s=SETS[currentSet];
+  if(!s)return;
+  if(!confirm('Remove '+s.label+' from tracker? Progress will be lost.'))return;
+  var isCustom=currentSet.startsWith('cset-');
+  delete SETS[currentSet];delete collected[currentSet];
+  if(isCustom){
+    localStorage.removeItem(KEY+'custom-'+currentSet);
+    delete customSets[currentSet];
+    localStorage.setItem(KEY+'custom-sets',JSON.stringify(customSets));
+  } else {
+    localStorage.removeItem(KEY+currentSet);
+  }
+  var tab=document.getElementById('tab-'+currentSet);
+  if(tab)tab.remove();
+  var first=Object.keys(SETS)[0];
+  var ft=document.getElementById('tab-'+(first||'noctowl'));
+  if(ft)switchSet(first||'noctowl',ft);
+}
 function resetCurrent(){
   if(!confirm('Reset all progress for this set?'))return;
   collected[currentSet]=new Set();save();updateStats();renderList();
