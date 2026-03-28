@@ -542,7 +542,16 @@ var HOOTHOOT=[
 {id:'h16',name:'Hoothoot',set:'Totodile Half Deck',num:'3',year:2000,lang:'jp',rarity:'Deck Card',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=hoothoot+totodile+half+deck+japanese',pc:null,nmPrice:'$5–$15',note:'Japan-exclusive. Intro Pack Neo Totodile Half Deck. One of rarest Hoothoot prints.'},
 {id:'h17',name:'Hoothoot',set:'L-P Promos',num:'025/L-P',year:2010,lang:'jp',rarity:'Promo Holo',special:false,promo:true,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=hoothoot+025+lp+promo+japanese',pc:null,nmPrice:'$10–$20',note:'Japanese promo. Pairs with Noctowl 026/L-P.'},
 {id:'h18',name:'Hoothoot (Art Rare)',set:'Battle Region',num:'077/067',year:2022,lang:'jp',rarity:'Art Rare',special:true,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=hoothoot+art+rare+battle+region+japanese',pc:null,nmPrice:'$10–$20',note:'Japan-exclusive Art Rare by HYOGONOSUKE. Stunning full-art. JP equivalent of TG12.'},
-];
+,
+  {id:'n36',name:'Noctowl',set:'To Have Seen the Battle Rainbow',num:'044/051',year:2017,lang:'jp',rarity:'Uncommon',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+battle+rainbow+japanese',pc:null,nmPrice:'$1-$3',note:'Japanese Burning Shadows equivalent.'},
+  {id:'n37',name:'Noctowl',set:'Blue Shock',num:'050/059',year:2015,lang:'jp',rarity:'Uncommon',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+blue+shock+japanese',pc:null,nmPrice:'$1-$2',note:'Japanese BREAKthrough equivalent.'},
+  {id:'n38',name:'Noctowl',set:'Wild Force',num:'055/071',year:2024,lang:'jp',rarity:'Common',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+wild+force+japanese',pc:null,nmPrice:'$0.50-$1',note:'Japanese Temporal Forces equivalent.'},
+  {id:'n39',name:'Noctowl',set:'Terastal Fest ex',num:'128/187',year:2025,lang:'jp',rarity:'Common',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+terastal+fest+japanese',pc:null,nmPrice:'$0.50-$1',note:'Japanese Prismatic Evolutions equivalent.'},
+  {id:'n40',name:'Noctowl',set:'Stellar Tera Type Starter Set',num:'010/022',year:2024,lang:'jp',rarity:'Deck Card',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+stellar+tera+starter+japanese',pc:null,nmPrice:'$1-$3',note:'Ceruledge ex starter deck exclusive.'},
+  {id:'n41',name:'Noctowl',set:'Battle Partners Deck Build Box',num:'008/045',year:2025,lang:'jp',rarity:'Deck Card',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+battle+partners+deck+japanese',pc:null,nmPrice:'$1-$3',note:'Battle Partners Deck Build Box exclusive.'},
+  {id:'n42',name:'Noctowl',set:'Premium Trainer Box MEGA',num:'009/043',year:2025,lang:'jp',rarity:'Deck Card',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+premium+trainer+box+mega+japanese',pc:null,nmPrice:'$1-$3',note:'Premium Trainer Box MEGA exclusive.'},
+  {id:'n43',name:'Noctowl',set:'MEGA Dream ex',num:'138/193',year:2025,lang:'jp',rarity:'Common',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+mega+dream+ex+japanese',pc:null,nmPrice:'$0.50-$1',note:'Japanese Ascended Heroes equivalent.'},
+  {id:'n44',name:'Noctowl',set:'Start Deck 100 Battle Collection',num:'573/742',year:2025,lang:'jp',rarity:'Deck Card',special:false,promo:false,img:null,ebay:'https://www.ebay.com/sch/i.html?_nkw=noctowl+start+deck+100+japanese',pc:null,nmPrice:'$0.50-$1',note:'Part of the 742-card Start Deck 100 Battle Collection.'}];
 
 // SURFING PIKACHU
 var SURFING=[
@@ -841,23 +850,6 @@ function delCurrentSet(){
   var ft=document.getElementById('tab-'+(first||'noctowl'));
   if(ft)switchSet(first||'noctowl',ft);
 }
-
-function delSet(){
-  if(!SETS[currentSet])return;
-  if(!confirm('Remove '+SETS[currentSet].label+' from tracker?'))return;
-  var isC=currentSet.startsWith('cset-');
-  delete collected[currentSet];
-  if(isC){
-    localStorage.removeItem(KEY+'custom-'+currentSet);
-    if(typeof customSets!='undefined'){delete customSets[currentSet];localStorage.setItem(KEY+'custom-sets',JSON.stringify(customSets));}
-  } else { localStorage.removeItem(KEY+currentSet); }
-  delete SETS[currentSet];
-  var t=document.getElementById('tab-'+currentSet); if(t)t.remove();
-  var first=Object.keys(SETS)[0];
-  var ft=document.getElementById('tab-'+(first||'noctowl'));
-  if(ft)switchSet(first||'noctowl',ft);
-}
-
 function resetCurrent(){
   if(!confirm('Reset all progress for this set?'))return;
   collected[currentSet]=new Set();save();updateStats();renderList();
