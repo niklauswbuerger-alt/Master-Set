@@ -1,9 +1,9 @@
 {
-  "name": "Pokémon Card Tracker",
-  "short_name": "Card Tracker",
+  "name": "Pokémon Master Set Tracker",
+  "short_name": "Master Set",
   "description": "Noctowl, Hoothoot, Surfing Pikachu, Mewtwo & custom master set tracker",
-  "start_url": "/card-tracker/index.html",
-  "scope": "/card-tracker/",
+  "start_url": "/Master-Set/index.html",
+  "scope": "/Master-Set/",
   "display": "standalone",
   "background_color": "#080812",
   "theme_color": "#080812",
