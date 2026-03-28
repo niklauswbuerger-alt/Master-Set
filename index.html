@@ -841,6 +841,23 @@ function delCurrentSet(){
   var ft=document.getElementById('tab-'+(first||'noctowl'));
   if(ft)switchSet(first||'noctowl',ft);
 }
+
+function delSet(){
+  if(!SETS[currentSet])return;
+  if(!confirm('Remove '+SETS[currentSet].label+' from tracker?'))return;
+  var isC=currentSet.startsWith('cset-');
+  delete collected[currentSet];
+  if(isC){
+    localStorage.removeItem(KEY+'custom-'+currentSet);
+    if(typeof customSets!='undefined'){delete customSets[currentSet];localStorage.setItem(KEY+'custom-sets',JSON.stringify(customSets));}
+  } else { localStorage.removeItem(KEY+currentSet); }
+  delete SETS[currentSet];
+  var t=document.getElementById('tab-'+currentSet); if(t)t.remove();
+  var first=Object.keys(SETS)[0];
+  var ft=document.getElementById('tab-'+(first||'noctowl'));
+  if(ft)switchSet(first||'noctowl',ft);
+}
+
 function resetCurrent(){
   if(!confirm('Reset all progress for this set?'))return;
   collected[currentSet]=new Set();save();updateStats();renderList();
